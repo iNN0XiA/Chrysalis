@@ -4,58 +4,54 @@ Commands:
 
 ✦ Help
 
-✦ Welcome
+✦ Welcome | Enable/Disable and customize welcome card.
 
-✦ Rank
+✦ Rank | Display a users level.
 
-✦ Rolemenu
+✦ Rolemenu | Choose roles for users to choose from.
 
-✦ Profile
+✦ Profile | Display a users profile.
 
-✦ Booru
+✦ Booru | Search for pony related images!
 
-✦ Boop
+✦ Boop | Boop another user!
 
-✦ Hug
+✦ Hug | Hug another user!
 
-✦ Say
+✦ Say | Tell Chrysalis what you want her to say.
 
-✦ Kiss
+✦ Kiss | Kiss another user!
 
-✦ Love
+✦ Love | Display love ratio between two users.
 
-✦ Clop
+✦ Avatar | Display Avatar.
 
-✦ e621
+✦ Leaderboard | Level and Rank Leaderboard!
 
-✦ Avatar
+✦ Color | Change the default color for embeds.
 
-✦ Leaderboard
+✦ Boost | Enable/Disable boost announcements.
 
-✦ Color
+✦ Clean | Delete X amount of Messages!
 
-✦ Boost
+✦ Setxp | Change your server XP.
 
-✦ Clean
+✦ Roleinfo | Displays info about a role.
 
-✦ Setxp
+✦ Serverinfo | Displays info about the server.
 
-✦ Roleinfo
+✦ Userinfo | Displays info about a user.
 
-✦ Serverinfo
+✦ Importxp | Import XP from other bots!
 
-✦ Userinfo
+✦ Bannedwords | Blacklist words for Chrysalis to detect.
 
-✦ Importxp
+✦ Prefix | Change her prefix.
 
-✦ Bannedwords
+✦ Config | Configure/Disable/Enable Specific commands!
 
-✦ Prefix
+✦ Lang | Change the bots language! (WIP)
 
-✦ Config
-
-✦ Lang
-
-✦ Torrent
+✦ Torrent | Watch My Little Pony
 
 | My Little Pony | MLP | Pony | Fandom |
