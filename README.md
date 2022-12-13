@@ -52,6 +52,4 @@ Commands:
 
 ✦ Lang | Change the bots language! (WIP)
 
-✦ Torrent | Watch My Little Pony
-
 | My Little Pony | MLP | Pony | Fandom |
