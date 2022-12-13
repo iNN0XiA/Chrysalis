@@ -1,7 +1,7 @@
 {
   "name": "chrysalis",
-  "version": "0.1.0",
-  "description": "Free MLP-themed Discord bot",
+  "version": "7.7.7",
+  "description": "Queen Chrysalis themed Discord bot",
   "main": "src/index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
