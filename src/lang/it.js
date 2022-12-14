@@ -1,22 +1,3 @@
-/*
-
- Copyright (C) 2022 programmerpony
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU Affero General Public License as
- published by the Free Software Foundation, either version 3 of the
- License, or (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU Affero General Public License for more details.
-
- You should have received a copy of the GNU Affero General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-*/
-
 const { ApplicationCommandOptionType } = require('discord.js');
 const defaultModules = require('../defaultModules.js');
 const emojis = require('../emojis.js');
@@ -378,27 +359,26 @@ module.exports = {
   server_join_date: 'Data di iscrizione al server',
   account_creation_date: `Data di creazione dell'account`,
   roles: 'Ruoli',
-  avatar: 'Avatar da {0}',
+  avatar: (user) => `Avatar da ${user}`,
   bulk_delete_two_weeks: 'Messaggi più vecchie di due semane non può essere eliminato.',
   bulk_delete_missing_permissions: 'Non ho i permissi necessari per ne elimnare in questo canale.',
   bulk_delete_max_100: 'Solo puoi elimnare meno che 100 messaggi.',
   no_images_found: 'Impossibile trovare immagini corrispondenti a quella ricerca.',
   jump_to_moment: 'Passa al momento',
-  the_current_prefix_is: 'Il prefisso attuale è **{0}**',
-  the_current_prefix_for_this_server_is: 'Il prefisso attuale per questo server è',
-  change_prefix_to: 'Cambia el prefisso con **{0}**?',
-  prefix_was_changed_to: 'Prefisso stato cambiato con **{0}**',
+  the_current_prefix_for_this_server_is: (prefix) => `Il prefisso attuale per questo server è ${prefix}`,
+  change_prefix_to: (prefix) => `Cambia el prefisso con **${prefix}**?`,
+  prefix_was_changed_to: (prefix) => `Prefisso stato cambiato con **${prefix}**`,
   valid_modules: 'Moduli validi',
   available_languages: 'Lingue disponibili',
-  boop_title: '{0} ha fatto un boop su {1}!',
-  boop_self: '{0} ha fatto un boop su se stesso',
-  boop_chrysalis: '{0} provava fare un boop a Chrysalis',
-  hug_title: '{0} ha abbracciato {1}',
-  hug_self: '{0} ha abbracciato se stesso',
-  hug_chrysalis: '{0} ha provato abbracciare Chrysalis.',
-  kiss_title: '{0} ha baciato {1}',
-  kiss_self: '{0} si bacia',
-  kiss_chrysalis: '{0} provava baciare Chrysalis',
+  boop_title: (user) => `${user[0]} ha fatto un boop su ${user[1]}!`,
+  boop_self: (user) => `${user} ha fatto un boop su se stesso`,
+  boop_chrysalis: (user) => `${user} provava fare un boop a Chrysalis`,
+  hug_title: (user) => `${user[0]} ha abbracciato ${user[1]}`,
+  hug_self: (user) => `${user} ha abbracciato se stesso`,
+  hug_chrysalis: (user) => `${user} ha provato abbracciare Chrysalis.`,
+  kiss_title: (user) => `${user[0]} ha baciato ${user[1]}`,
+  kiss_self: (user) => `${user} si bacia`,
+  kiss_chrysalis: (user) => `${user} provava baciare Chrysalis`,
   server_info: 'Informazioni del server:',
   server_id: 'ID del server',
   server_owner: 'Proprietario del server',
@@ -410,15 +390,14 @@ module.exports = {
   module_updated: 'Il modulo è aggiornato!',
   attachments: 'Allegati',
   message_id: 'ID del messaggio',
-  module_enabled: 'Modulo {0} sta abilitato!',
-  module_disabled: 'Modulo {0} sta disabilitato!',
-  module_already_enabled: 'Il modulo {0} era già abilitato.',
-  module_already_disabled: 'Il modulo {0} era già disabilitato.',
+  module_enabled: (m) => `Modulo ${m} sta abilitato.`,
+  module_disabled: (m) => `Modulo ${m} sta disabilitato.`,
+  module_already_enabled: (m) => `Il modulo ${m} era già abilitato.`,
+  module_already_disabled: (m) => `Il modulo ${m} era già disabilitato.`,
   current_color: 'Colore attuale',
-  change_color_to: 'Cambia il colore in {0}?',
+  change_color_to: (hex) => `Cambia il colore in ${hex}?`,
   invalid_color: 'Colore non valido.',
-  color_was_changed_to: 'Il colore sta cambiato in {0}',
-  usage: 'Utilizzo',
+  color_was_changed_to:  (hex) => `Il colore sta cambiato in ${hex}`,
   role_menu: 'Menu ruolo ',
   select_the_roles_that_you_want: 'Seleziona i ruoli che desideri',
   no_valid_roles_found: 'Nessun ruolo valido trovato. Digitare gli ID ruolo separati da ritorni a capo.',
@@ -438,7 +417,7 @@ module.exports = {
   unkown_role: 'Impossibile trovare il ruolo.',
   role_id: 'ID del ruolo',
   welcome: 'Benvenuto!',
-  you_are_the_member_n: 'Sei membro Nº{0}',
+  you_are_the_member_n: (n) => `Sei membro Nº${n}`,
   filter_not_found: 'Impossibile trovare il filtro, controlla se il filtro è pubblico.',
   help_time_out: 'Il tempo per spostarsi tra le pagine è finito.',
   old_message: 'Messagio vecchio',
@@ -455,7 +434,7 @@ module.exports = {
   embed_links_permission_missing: `Chrysalis non ha il permesso di inviare embed a questo canale. Si prega di concedere a Chrysalis il permesso "Incorporare i link".`,
   please_type_a_valid_positive_integer: 'Por favore, invia un numero intero positivo.',
   module_property_not_found: 'Proprietà del modulo non trovata.',
-  levelup: '**Sei salito di livello!**\nOra sei di livello **{level}**!',
+  levelup: (level) => `**Sei salito di livello!**\nOra sei di livello **${level}**!`,
   leaderboard_title: 'Classifica',
   level: 'Livello',
   rank: 'Rango',
@@ -466,8 +445,8 @@ module.exports = {
   unsupported_image_type: 'Tipo di immagine non supportato.',
   check_documentation: 'Fare clic sul nome del modulo per aprire la documentazione per questo modulo.',
   import_levels_from: 'Da quale bot vuoi importare i livelli?',
-  no_levels_found: 'Nessun livello trovato da {bot} in questo server.',
-  mee6_fix: 'Assicurati la tua classifica MEE6 è pubblico cliccando [questa opzione](https://mee6.xyz/dashboard/921413532141101077/leaderboard).',
+  no_levels_found: (bot) => `Nessun livello trovato da ${bot} in questo server.`,
+  mee6_fix: (guildID) => `Assicurati la tua classifica MEE6 è pubblico cliccando [questa opzione](https://mee6.xyz/dashboard/${guildID}/leaderboard).`,
   xp_migration_adapt: 'Il modo in cui viene calcolato XP potrebbe essere diverso da quello di altri bot. Cosa vuoi fare?',
   import_levels_and_adapt_xp: 'Importa i livelli e adatta XP',
   import_xp_and_adapt_levels: 'Importa il XP e adatta i livelli',
@@ -500,7 +479,7 @@ module.exports = {
   module_time_out: 'Il tempo per modificare questo modulo è finito',
   use_modal_instead: 'Le parole bloccate non possono essere modificate in questo modo. Si prega di utilizzare il pulsante Modificare.',
   bannedwords_deprecated: 'Questo comando è deprecato. Per modificare le parole vietate, usa `c!config bannedwords` e fai clic sul pulsante Modificare.',
-  messages_deleted: `{0} messaggi eliminati! ${emojis.PinkiePieYes}`,
+  messages_deleted: (n) => `${n} messaggi${n>1?'':'o'} eliminat${n>1?'i':'o'}! ${emojis.PinkiePieYes}`,
   optional: 'opzionale',
   click_to_open_modal: 'Dal momento che non stai usando un comando slash, dovrai fare clic su questo pulsante per aprire il menu.',
   sendMessageOnDelete: 'Invia MD dopo aver eliminato il messaggio',
