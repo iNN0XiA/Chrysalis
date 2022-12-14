@@ -2,7 +2,7 @@ module.exports = async (users, guild, guildInfo, lang) => {
   let lb = ''
   let highscores = users.sort((a, b) => (a.xp < b.xp) ? 1 : -1);
   for (i in highscores.slice(0,10)) {
-    lb+=`${getNumberEmoji(+i+1)} ► <@!${highscores[i].id}>
+    lb+=`${getNumberEmoji(+i+1)} ► <@${highscores[i].id}>
           ${lang.level}: \`${Math.trunc((Math.sqrt(5)/5)*Math.sqrt(highscores[i].xp))}\`
           XP: \`${highscores[i].xp}\`\n`;
   }
