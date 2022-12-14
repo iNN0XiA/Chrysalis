@@ -17,7 +17,7 @@ module.exports = {
         return reply(message, {content:lang.bulk_delete_two_weeks}, true);
       }
       else return reply(message, {content:lang.bulk_delete_max_100}, true);
-      if (!message.author) message.editReply(lang.messages_deleted.replace('{0}',messagesToDelete));
+      if (!message.author) message.editReply(lang.messages_deleted(messagesToDelete));
     }
   }
 }
