@@ -112,6 +112,7 @@ async function setUp(i, lang) {
     ]
   }));
   let answer = await i.awaitModalSubmit({ filter: a => a.customId === `rolemenu-${i.id}`, time: 120_000 }).catch(r=>{});
+  if (!answer) return;
   return {
     title: answer.fields.getTextInputValue('title'),
     description: answer.fields.getTextInputValue('description'),
