@@ -1,22 +1,3 @@
-/*
-
- Copyright (C) 2022 programmerpony
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU Affero General Public License as
- published by the Free Software Foundation, either version 3 of the
- License, or (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU Affero General Public License for more details.
-
- You should have received a copy of the GNU Affero General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-*/
-
 const { ApplicationCommandOptionType } = require('discord.js');
 const defaultModules = require('../defaultModules.js');
 const emojis = require('../emojis.js');
@@ -378,27 +359,26 @@ module.exports = {
   server_join_date: 'Fecha de ingreso al servidor',
   account_creation_date: 'Fecha de creación de la cuenta',
   roles: 'Roles',
-  avatar: 'Avatar de {0}',
+  avatar: (user) => `Avatar de ${user}`,
   bulk_delete_two_weeks: 'No se pueden eliminar mensajes enviados hace más de dos semanas.',
   bulk_delete_missing_permissions: 'No tengo permiso para borrar mensajes en este canal.',
   bulk_delete_max_100: 'Solo puedes borar menos de 100 mensajes de golpe.',
   no_images_found: 'No se ha podido encontrar ninguna imagen.',
   jump_to_moment: 'Saltar al momento',
-  the_current_prefix_is: 'El prefijo actual es **{0}**',
-  the_current_prefix_for_this_server_is: 'El prefijo actual de este servidor es',
-  change_prefix_to: '¿Cambiar el prefijo a **{0}**?',
-  prefix_was_changed_to: 'El prefijo fue cambiado a **{0}**',
+  the_current_prefix_for_this_server_is: (prefix) => `El prefijo actual de este servidor es ${prefix}`,
+  change_prefix_to: (prefix) => `¿Cambiar el prefijo a **${prefix}**?`,
+  prefix_was_changed_to: (prefix) => `El prefijo fue cambiado a **${prefix}**`,
   valid_modules: 'Módulos válidos',
   available_languages: 'Idiomas disponibles',
-  boop_title: '{0} le ha hecho boop a {1}',
-  boop_self: '{0} se ha hecho boop a sí mism@',
-  boop_chrysalis: '{0} trató de hacerle boop a Chrysalis',
-  hug_title: '{0} ha abrazado a {1}',
-  hug_self: '{0} se ha abrazado a sí mism@',
-  hug_chrysalis: '{0} trató de abrazar a Chrysalis',
-  kiss_title: '{0} le ha dado un beso a {1}',
-  kiss_self: '{0} se ha besado a sí mism@',
-  kiss_chrysalis: '{0} intentó besar a Chrysalis',
+  boop_title: (user) => `${user[0]} le ha hecho boop a ${user[1]}`,
+  boop_self: (user) => `${user} se ha hecho boop a sí mism@`,
+  boop_chrysalis: (user) => `${user} trató de hacerle boop a Chrysalis`,
+  hug_title: (user) => `${user[0]} ha abrazado a ${user[1]}`,
+  hug_self: (user) => `${user} se ha abrazado a sí mism@`,
+  hug_chrysalis: (user) => `${user} trató de abrazar a Chrysalis`,
+  kiss_title: (user) => `${user[0]} le ha dado un beso a ${user[1]}`,
+  kiss_self: (user) => `${user} se ha besado a sí mism@`,
+  kiss_chrysalis: (user) => `${user} intentó besar a Chrysalis`,
   server_info: 'Información del servidor:',
   server_id: 'ID del servidor',
   server_owner: 'Propietari@ del servidor',
@@ -410,15 +390,14 @@ module.exports = {
   module_updated: '¡Módulo actualizado!',
   attachments: 'Archivos adjuntos',
   message_id: 'ID del mensaje',
-  module_enabled: 'Módulo {0} habilitado',
-  module_disabled: 'Módulo {0} deshabilitado',
-  module_already_enabled: 'El módulo {0} ya estaba habilitado.',
-  module_already_disabled: 'El módulo {0} ya estaba deshabilitado.',
+  module_enabled: (m) => `Módulo ${m} habilitado.`,
+  module_disabled: (m) => `Módulo ${m} deshabilitado.`,
+  module_already_enabled: (m) => `El módulo ${m} ya estaba habilitado.`,
+  module_already_disabled: (m) => `El módulo ${m} ya estaba deshabilitado.`,
   current_color: 'Color actual',
-  change_color_to: '¿Cambiar color a {0}?',
+  change_color_to: (hex) => `¿Cambiar color a ${hex}?`,
   invalid_color: 'Color no válido.',
-  color_was_changed_to: 'Se ha cambiado el color a {0}',
-  usage: 'Uso',
+  color_was_changed_to: (hex) => `Se ha cambiado el color a ${hex}`,
   role_menu: 'Menú de roles',
   select_the_roles_that_you_want: 'Selecciona los roles que quieras',
   no_valid_roles_found: 'No se han encontrado roles válidos. Escribe IDs de roles separadas por saltos de línea.',
@@ -438,7 +417,7 @@ module.exports = {
   unkown_role: 'No he podido encontrar ese rol.',
   role_id: 'ID del rol',
   welcome: '¡Bienvenid@!',
-  you_are_the_member_n: 'Eres el miembro Nº{0}',
+  you_are_the_member_n: (n) => `Eres el miembro Nº${n}`,
   filter_not_found: 'Filtro no encontrado. Por favor, asegúrate  de que el filtro es público.',
   help_time_out: 'El tiempo para pasar las páginas se ha acabado.',
   old_message: 'Mensaje viejo',
@@ -455,7 +434,7 @@ module.exports = {
   embed_links_permission_missing: 'Chrysalis no tiene permiso para enviar embeds a este canal. Por favor, dale a Chrysalis el permiso de "Insertar enlaces"',
   please_type_a_valid_positive_integer: 'Por favor, escribe un número entero positivo.',
   module_property_not_found: 'Propiedad del módulo no encontrada.',
-  levelup: '**¡Has subido de nivel!**\nAhora eres nivel **{level}**.',
+  levelup: (level) => `**¡Has subido de nivel!**\nAhora eres nivel **${level}**.`,
   leaderboard_title: 'Tabla de clasificación',
   level: 'Nivel',
   rank: 'Rango',
@@ -466,8 +445,8 @@ module.exports = {
   unsupported_image_type: 'Tipo de imagen no soportado.',
   check_documentation: 'Haz clic en el nombre del módulo para abrir la documentación de este módulo.',
   import_levels_from: '¿De qué bot quieres importar los niveles?',
-  no_levels_found: 'No se han encontrado niveles de {bot} en este servidor.',
-  mee6_fix: 'Por favor, asegúrate de que tu tabla de clasificación de MEE6 es pública activando [esta opción](https://mee6.xyz/dashboard/921413532141101077/leaderboard).',
+  no_levels_found: (bot) => `No se han encontrado niveles de ${bot} en este servidor.`,
+  mee6_fix: (guildID) => `Por favor, asegúrate de que tu tabla de clasificación de MEE6 es pública activando [esta opción](https://mee6.xyz/dashboard/${guildID}/leaderboard).`,
   xp_migration_adapt: 'La forma en que Chrysalis calcula niveles puede ser distinta a la de otros bots. ¿Qué quieres hacer?',
   import_levels_and_adapt_xp: 'Importar niveles y adaptar XP',
   import_xp_and_adapt_levels: 'Importar XP y adaptar niveles',
@@ -500,7 +479,7 @@ module.exports = {
   module_time_out: 'El tiempo para editar este módulo se ha acabado.',
   use_modal_instead: 'Las palabras bloqueadas no se pueden editar así. Por favor, utiliza el botón de Editar.',
   bannedwords_deprecated: 'Este comando está obsoleto. Para editar las palabras bloqueadas, utiliza `c!config bannedwords` y haz clic en el botón de Editar.',
-  messages_deleted: `¡**{0}** mensaje(s) eliminado(s)! ${emojis.PinkiePieYes}`,
+  messages_deleted: (n) => `¡${n} mensaje${n>1?'s':''} eliminado${n>1?'s':''}! ${emojis.PinkiePieYes}`,
   optional: 'opcional',
   click_to_open_modal: 'Debido a que no estás usando un comando de barra diagonal, tendrás que pulsar este botón para abrir el menú.',
   sendMessageOnDelete: 'Enviar MD después de borrar',
