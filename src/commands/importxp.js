@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 const formatLeaderboard = require('../utils/embed/formatLeaderboard.js');
 const connectToDatabase = require('../utils/connectToDatabase.js');
 const reply = require('../utils/reply.js');
+const emojis = require('../emojis.js');
 const bots = ['MEE6', 'AmariBot'];
 
 module.exports = {
@@ -24,7 +25,7 @@ module.exports = {
       components: [row]
     }, true);
     let filter = (interaction) => interaction.user.id === message.member.id;
-    let collector = botMessage.createMessageComponentCollector({filter: filter,  time: 12000 });
+    let collector = botMessage.createMessageComponentCollector({ filter, time: 12_000 });
     collector.on('end', async (collected, reason) => {
       if (reason == 'time') dismiss(message, botMessage);
     });
@@ -46,7 +47,7 @@ module.exports = {
           style: ButtonStyle.Secondary
         })
       ])]});
-      let collector2 = botMessage.createMessageComponentCollector({filter,  time: 120000 });
+      let collector2 = botMessage.createMessageComponentCollector({ filter, time: 120_000 });
       collector2.on('end', async (collected, reason) => {
         if (reason == 'time') dismiss(message, botMessage);
       });
@@ -64,7 +65,7 @@ module.exports = {
               let json = await fetch(`https://mee6.xyz/api/plugins/levels/leaderboard/${message.guild.id}?page=${p}`).then(res => res.json());
               if (json.error) return botMessage.edit({embeds:[new EmbedBuilder()
                 .setTitle('Error')
-                .setDescription(`${lang.no_levels_found.replace('{bot}',bot.customId)} ${lang.mee6_fix}`)
+                .setDescription(`${lang.no_levels_found(bot = bot.customId)} ${lang.mee6_fix(message.guild.id)}`)
                 .setColor('#e12929')
                 .setImage('https://cdn.discordapp.com/attachments/862296245922037800/970653208777211994/unknown.png')
               ],components:[],content:null});
@@ -91,7 +92,7 @@ module.exports = {
         }
         if (!users.length) return botMessage.edit({embeds:[new EmbedBuilder()
           .setTitle('Error')
-          .setDescription(`${lang.no_levels_found.replace('{bot}',bot.customId)}`)
+          .setDescription(`${lang.no_levels_found(bot = bot.customId)}`)
           .setColor('#e12929')
         ],components:[],content:null});
 
@@ -101,18 +102,18 @@ module.exports = {
           embeds: [leaderboard],
           components: [new ActionRowBuilder().addComponents([
             new ButtonBuilder({
-              label: '✓',
               customId: 'yes',
+              emoji: emojis.PinkiePieYes,
               style: ButtonStyle.Success
             }),
             new ButtonBuilder({
-              label: '×',
               customId: 'no',
+              emoji: emojis.PinkiePieNo,
               style: ButtonStyle.Danger
             })
           ])]
         })
-        let collector3 = botMessage.createMessageComponentCollector({filter,  time: 120000 });
+        let collector3 = botMessage.createMessageComponentCollector({ filter, time: 120_000 });
         collector3.on('end', async (collected, reason) => {
           if (reason == 'time') dismiss(message, botMessage);
         });
