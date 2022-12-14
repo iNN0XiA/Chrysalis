@@ -8,7 +8,7 @@ module.exports = async (client, user, level, channelID, color, lang) => {
 	if (!channel.permissionsFor(client.user.id).has(PermissionsBitField.Flags.SendMessages)) return;
 	channel.send({content: `${user}`, embeds:[{
 		title: user.username,
-		description: lang.levelup.replaceAll('{level}',level),
+		description: lang.levelup(level),
 		color: color,
 		thumbnail: { url: user.displayAvatarURL({ forceStatic: true, size: 512 }) }
 	}]}).catch(r=>{});
