@@ -20,7 +20,7 @@ module.exports = {
 
     let requestedColor = args[0].replaceAll('#','');
     requestedColor = `#${requestedColor.repeat(6).substring(0,6)}`;
-    let embed = new EmbedBuilder().setTitle(lang.change_color_to.replace('{0}', requestedColor));
+    let embed = new EmbedBuilder().setTitle(lang.change_color_to(requestedColor));
     try {
       embed.setColor(requestedColor);
     } catch (e) {
@@ -51,7 +51,7 @@ module.exports = {
         await guilds.updateOne({id: message.guild.id},{ $set: { color: resolveColor(requestedColor)}});
         db.close();
         i.update({embeds:[{
-          title: lang.color_was_changed_to.replace('{0}', requestedColor),
+          title: lang.color_was_changed_to(requestedColor),
           color: resolveColor(requestedColor)
         }],components:[]});
       }
