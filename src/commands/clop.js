@@ -20,6 +20,6 @@ module.exports = {
     } else {
       query = `(questionable || explicit), -${f.join(',-')}&filter_id=${filter}&per_page=50`;
     }
-    fetchImage(client, query, message, guildInfo.color, 1, lang);
+    fetchImage(client, query, message, guildInfo.color, lang);
   }
 }
