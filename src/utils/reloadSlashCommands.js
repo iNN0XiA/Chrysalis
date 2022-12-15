@@ -1,4 +1,3 @@
-
 module.exports = async (client, guild, guildInfo) => {
   let lang = require(`../lang/${guildInfo.lang}.js`);
   let applicationCommands = [];
