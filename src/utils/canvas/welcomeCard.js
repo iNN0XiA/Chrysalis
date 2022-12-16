@@ -31,7 +31,7 @@ module.exports = async (lang, bgURL, channel, user, content, i) => {
 	await fillTextWithTwemoji(ctx, `${user.username.length > 21 ? user.username.toUpperCase().slice(0,18)+'...' : user.username.toUpperCase()}#${user.discriminator}`, canvas.width/2, canvas.height/2+182);
 	ctx.font = '36px Montserrat Black';
 	// Member count
-	ctx.fillText(lang.you_are_the_member_n.toUpperCase().replace('{0}',channel.guild.memberCount), canvas.width/2, canvas.height/2+220);
+	ctx.fillText(lang.you_are_the_member_n(channel.guild.memberCount).toUpperCase(), canvas.width/2, canvas.height/2+220);
 
 	// Profile picture
 	const radius = 128;
