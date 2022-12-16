@@ -1,5 +1,5 @@
 Invite Chrysalis!
-![The Queen](https://i.imgur.com/fCKBq06.png)
+![Alt text](https://i.imgur.com/fCKBq06.png "The Queen")
 https://discord.bots.gg/bots/1052032134254170122
 
 ![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
