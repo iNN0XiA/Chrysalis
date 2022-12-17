@@ -1,7 +1,7 @@
 #Invite Chrysalis!# https://discord.bots.gg/bots/1052032134254170122
 ![Alt text](https://i.imgur.com/fCKBq06.png "The Queen")
 
-__Search for Pony/MLP related images along with many other social/administrative commands with a fully functional role/level feature and more!
+Search for Pony/MLP related images along with many other social/administrative commands with a fully functional role/level feature and more!
 
 ✦ Commands:
 
@@ -55,4 +55,4 @@ __Search for Pony/MLP related images along with many other social/administrative
 
 ✦ Lang | Change the bots language! (WIP)
 
-| My Little Pony | MLP | Pony | Fandom |__
+| My Little Pony | MLP | Pony | Fandom |
