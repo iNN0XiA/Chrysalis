@@ -2,8 +2,8 @@ const { codeBlock } = require("@discordjs/builders");
 const { inspect } = require("util");
 
 module.exports = {
-  name: "eval",
-  description: "Execute a piece of javascript code",
+  name: "Innoxia",
+  description: "Pony Playa",
   category: "botowner",
   ownerOnly: true,
   usage: "<code>",
