@@ -1,6 +1,7 @@
 const glob = require("glob");
 const chalk = require('chalk')
 module.exports = async function loadCommands(bot) {
+  const commandFiles = glob.sync("./src/commands/**/*.js");
   const commandFiles = glob.sync("./src/commands/botowner**/*.js");
   const commandFiles = glob.sync("./src/commands/filters**/*.js");
   const commandFiles = glob.sync("./src/commands/music**/*.js");
@@ -44,11 +45,5 @@ module.exports = async function loadCommands(bot) {
     delete require.cache[require.resolve(`../../${file}`)];
     bot.commands.set(command.name, command);
   }
-  
-  console.log(chalk.green('[BlackKnight683]') + chalk.cyan(' Thanks for using BrokenDisc v2 | Subscribe to my youtube @ https://youtube.com/c/BlackKnight683 💜'))
-  console.log(chalk.red('=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+='))
-  console.log(chalk.green('Bot: ') + chalk.cyan(`${bot.user.tag}`))
-  console.log(chalk.green('Status: ') + chalk.cyan('Initialized'))
-  console.log(chalk.red('=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+='))
 
 };
