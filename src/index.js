@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, Collection, EmbedBuilder, PermissionsBitField, OAuth2Scopes, resolveColor, Intents } = require('discord.js');
-const { Player } = require("discord-player");
+const Player = require("discord-player");
 const presence = require('./presence.js');
 const client = new Client({
 	failIfNotExists: false,
@@ -27,7 +27,7 @@ const announceLevelUp = require('./utils/embed/announceLevelUp.js');
 const boostEmbed = require('./utils/embed/boostEmbed.js');
 const connectToDatabase = require('./utils/connectToDatabase.js');
 const defaultModules = require('./defaultModules.js');
-const { BotToken } = require("../config.json");
+const BotToken = require("../config.json");
 const Logger = require('./modules/Logger.js');
 const Embeds = require('./modules/Embeds.js');
 const Util = require('./modules/Util.js');
@@ -45,6 +45,21 @@ client.on('ready', async () => {
 	let totalMembers = 0;
 	for (guild of client.guilds.cache.values()) totalMembers+=guild.memberCount;
 	console.log(highlight(`${client.user.username} is ready on ${client.guilds.cache.size} server${client.guilds.cache.size !== 1 ? 's' : ''} with a total of ${totalMembers} members!`));
+});
+
+client.commands = new Collection();
+
+client.logger = Logger;
+client.utils = Util;
+client.say = Embeds;
+
+client.player = new Player(client, {
+  leaveOnEnd: true,
+  leaveOnStop: true,
+  leaveOnEmpty: true,
+  leaveOnEmptyCooldown: 60000,
+  autoSelfDeaf: true,
+  initialVolume: 100
 });
 
 client.on('guildCreate', (guild) => {
