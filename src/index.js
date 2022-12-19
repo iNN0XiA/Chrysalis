@@ -27,7 +27,7 @@ const announceLevelUp = require('./utils/embed/announceLevelUp.js');
 const boostEmbed = require('./utils/embed/boostEmbed.js');
 const connectToDatabase = require('./utils/connectToDatabase.js');
 const defaultModules = require('./defaultModules.js');
-const { BotToken } = require("../config.json");
+const { botToken } = require("../config.json");
 const Logger = require('./modules/Logger.js');
 const Embeds = require('./modules/Embeds.js');
 const Util = require('./modules/Util.js');
@@ -61,6 +61,8 @@ client.player = new Player(client, {
   autoSelfDeaf: true,
   initialVolume: 100
 });
+
+client.login(botToken);
 
 client.on('guildCreate', (guild) => {
 	console.log(`Client joined guild ${guild.name} with ID ${guild.id}`);
