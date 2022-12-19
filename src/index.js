@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, Collection, EmbedBuilder, PermissionsBitField, OAuth2Scopes, resolveColor, Intents } = require('discord.js');
-const Player = require("discord-player");
+const { Player } = require("discord-player");
 const presence = require('./presence.js');
 const client = new Client({
 	failIfNotExists: false,
@@ -27,7 +27,7 @@ const announceLevelUp = require('./utils/embed/announceLevelUp.js');
 const boostEmbed = require('./utils/embed/boostEmbed.js');
 const connectToDatabase = require('./utils/connectToDatabase.js');
 const defaultModules = require('./defaultModules.js');
-const BotToken = require("../config.json");
+const { BotToken } = require("../config.json");
 const Logger = require('./modules/Logger.js');
 const Embeds = require('./modules/Embeds.js');
 const Util = require('./modules/Util.js');
