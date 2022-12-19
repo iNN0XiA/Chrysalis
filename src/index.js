@@ -1,3 +1,22 @@
+/*
+
+ Copyright (C) 2022 programmerpony
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as
+ published by the Free Software Foundation, either version 3 of the
+ License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+*/
+
 const { Client, GatewayIntentBits, Collection, EmbedBuilder, PermissionsBitField, OAuth2Scopes, resolveColor } = require('discord.js');
 const presence = require('./presence.js');
 const client = new Client({
@@ -106,7 +125,10 @@ client.on('guildMemberRemove', async (member) => {
 });
 
 client.on('guildMemberUpdate', async (oldMember, newMember) => {
-	if (!oldMember.premiumSinceTimestamp && newMember.premiumSinceTimestamp) boostEmbed(newMember, await getGuildInfo(newMember.guild));
+	// New booster
+	if (!oldMember.premiumSince && newMember.premiumSince) boostEmbed(newMember, await getGuildInfo(newMember.guild));
+	// Renewing boost
+	if (oldMember.premiumSince && oldMember.premiumSinceTimestamp != newMember.premiumSinceTimestamp) boostEmbed(newMember, await getGuildInfo(newMember.guild));
 });
 
 client.on('guildBanAdd', async (ban) => {
@@ -146,57 +168,6 @@ client.on('interactionCreate', async (i) => {
 			else await i.followUp({ content: lang.roles_managed_by_integrations_cannot_be_manually_assigned, ephemeral: true }).catch(r=>{});
 		}
 	}
-
-	require('dotenv').config();
-	const path = require('path');
-	const fs = require('fs');
-	const reloadSlashCommands = require('./utils/reloadSlashCommands.js');
-	const announceLevelUp = require('./utils/embed/announceLevelUp.js');
-	const boostEmbed = require('./utils/embed/boostEmbed.js');
-	const connectToDatabase = require('./utils/connectToDatabase.js');
-	const defaultModules = require('./defaultModules.js');
-	const onCooldown = new Set();
-	const inVoiceChat = new Set();
-	const banned = new Set();
-
-
-
-require('./modules/checkValid').config();
-const { Collection, Client, Intents } = require('.discord.js');
-const Player = require('.discord-player');
-const botToken = require('../config.json');
-const Logger = require('./modules/Logger');
-const Embeds = require('./modules/Embeds');
-const Util = require('./modules/Util');
-
-const bot = new Client({
-  intents: [
-    GatewayIntentBits.FLAGS.GUILDS,
-    GatewayIntentBits.FLAGS.GUILD_MESSAGES,
-    GatewayIntentBits.FLAGS.GUILD_VOICE_STATES
-	        // ...
-  ],
-  allowedMentions: { parse: ["roles", "users"], repliedUser: false }
-});
-
-bot.commands = new Collection();
-
-bot.logger = Logger;
-bot.utils = Util;
-bot.say = Embeds;
-
-bot.player = new Player(bot, {
-  leaveOnEnd: true,
-  leaveOnStop: true,
-  leaveOnEmpty: true,
-  leaveOnEmptyCooldown: 60000,
-  autoSelfDeaf: true,
-  initialVolume: 100
-});
-
-require('./handler/EventHandler')(bot);
-
-bot.login(botToken);
 
 	// Delete inappropriate images
 	if (i.customId.startsWith('report')) {
@@ -277,7 +248,7 @@ async function registerCommands() {
 		client.commands.set(commandfile.name, commandfile);
 		console.log(`${jsfile} loaded`);
 	}
-	for (guild of client.guilds.cache.values()) {
+	for (let guild of client.guilds.cache.values()) {
 		let guildInfo = await getGuildInfo(guild);
 		await reloadSlashCommands(client, guild, guildInfo);
 	}
@@ -291,7 +262,7 @@ async function bannedWords(message, guildInfo) {
 	if (!bannedwords.enabled) return false;
 	if (message.member && message.member.permissions.has(PermissionsBitField.Flags.Administrator) && bannedwords.ignoreAdmins) return;
 	let lang = require(`./lang/${guildInfo.lang}.js`);
-	for (word of bannedwords.words) {
+	for (let word of bannedwords.words) {
 		if (message.content.toLowerCase().includes(word.toLowerCase())) {
 			try {
 				await message.delete();
@@ -301,8 +272,8 @@ async function bannedWords(message, guildInfo) {
 			}
 		}
 		if (message.attachments.size>0) {
-			for (word of bannedwords.words) {
-				for (attachment of message.attachments.values()) {
+			for (let word of bannedwords.words) {
+				for (let attachment of message.attachments.values()) {
 					if (attachment.name.toLowerCase().includes(word.toLowerCase())) {
 						try {
 							await message.delete();
@@ -347,7 +318,7 @@ async function botInfo(message, guildInfo) {
 				inline: true
 			}
 		],
-		footer: {text: `${lang.the_current_prefix_for_this_server_is} ${guildInfo.prefix}`}
+		footer: {text: lang.the_current_prefix_for_this_server_is(guildInfo.prefix)}
 	}]}).catch(r=>{});
 }
 
@@ -549,29 +520,24 @@ async function getGuildInfo(guild) {
 		await createGuild(guild, false);
 		guildInfo = await guilds.findOne({id: guild.id});
 	}
-	let modules = guildInfo.modules;
 	// Remove null modules
-	let validModules = modules.filter(m => m !== null);
-	if (validModules.length < modules.length) {
-		console.log(`Null modules found on guild with ID ${guild.id}`);
-		modules = validModules;
-		await guilds.updateOne({id: guild.id},{ $set: { modules: modules}});
-	}
+	guildInfo.modules = guildInfo.modules.filter(m=>m!==null);
 	// Add missing modules
-	for (dm of defaultModules) if (!modules.find((m) => m.name == dm.name)) modules.push(dm);
-	for (m of modules) {
+	for (let dm of defaultModules) if (!guildInfo.modules.find((m) => m.name == dm.name)) guildInfo.modules.push(dm);
+	for (let m of guildInfo.modules) {
+		let dm = defaultModules.find((dm) => dm.name == m.name);
 		// Remove leftover modules
-		moduleModel = defaultModules.find((dm) => dm.name == m.name);
-		if (!moduleModel) {
-			delete m;
+		if (!dm) {
+			delete guildInfo.modules[guildInfo.modules.indexOf(m)];
+			guildInfo.modules = guildInfo.modules.filter(m=>m!==null);
 			continue;
 		}
-		// Add missing properties
-		for (key in moduleModel) if (!(key in m)) m[key] = moduleModel[key];
-		// Remove leftover properties
-		for (key in m) if (!(key in moduleModel)) delete m[key];
+		let model = JSON.parse(JSON.stringify(dm));
+		// Add missing properties and remove leftover properties
+		for (let p in m) if (p in model) model[p] = m[p];
+		guildInfo.modules[guildInfo.modules.indexOf(m)] = JSON.parse(JSON.stringify(model));
 	}
-	await guilds.updateOne({id: guild.id},{ $set: { modules: modules, color: resolveColor(guildInfo.color) }});
+	await guilds.updateOne({id: guild.id},{ $set: { modules: guildInfo.modules, color: resolveColor(guildInfo.color) }});
 	db.close();
 	return guildInfo;
 }
