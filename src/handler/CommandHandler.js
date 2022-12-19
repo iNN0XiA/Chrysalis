@@ -1,7 +1,11 @@
 const glob = require("glob");
 const chalk = require('chalk')
 module.exports = async function loadCommands(bot) {
-  const commandFiles = glob.sync("./src/commands/**/*.js");
+  const commandFiles = glob.sync("./src/commands/botowner**/*.js");
+  const commandFiles = glob.sync("./src/commands/filters**/*.js");
+  const commandFiles = glob.sync("./src/commands/music**/*.js");
+  const commandFiles = glob.sync("./src/commands/**/player*.js");
+  const commandFiles = glob.sync("./src/commands/**/utility*.js");
 
   bot.logger.info("COMMANDS", `Loading ${commandFiles.length} commands... (This may take a while)`)
 
