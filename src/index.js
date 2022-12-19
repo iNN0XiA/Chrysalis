@@ -1,4 +1,5 @@
-const { Client, GatewayIntentBits, Collection, EmbedBuilder, PermissionsBitField, OAuth2Scopes, resolveColor } = require('discord.js');
+const { Client, GatewayIntentBits, Collection, EmbedBuilder, PermissionsBitField, OAuth2Scopes, resolveColor, intents } = require('discord.js');
+const player = require("discord-player");
 const presence = require('./presence.js');
 const client = new Client({
 	failIfNotExists: false,
@@ -12,9 +13,13 @@ const client = new Client({
 		GatewayIntentBits.GuildVoiceStates,
 		GatewayIntentBits.GuildBans,
 		GatewayIntentBits.DirectMessages
-	]
+  ],
+  allowedMentions: { parse: ["roles", "users"], repliedUser: false }
 });
+
 require('dotenv').config();
+require("./modules/checkValid");
+require("./handler/EventHandler");
 const path = require('path');
 const fs = require('fs');
 const reloadSlashCommands = require('./utils/reloadSlashCommands.js');
@@ -22,6 +27,9 @@ const announceLevelUp = require('./utils/embed/announceLevelUp.js');
 const boostEmbed = require('./utils/embed/boostEmbed.js');
 const connectToDatabase = require('./utils/connectToDatabase.js');
 const defaultModules = require('./defaultModules.js');
+const Logger = require('./modules/Logger.js');
+const Embeds = require('./modules/Embeds.js');
+const Util = require('./modules/Util.js');
 const onCooldown = new Set();
 const inVoiceChat = new Set();
 const banned = new Set();
