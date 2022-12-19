@@ -7,6 +7,8 @@ Search for Pony/MLP related images along with many other social/administrative c
 
 ✦ Help
 
+✦ Music
+
 ✦ Welcome | Enable/Disable and customize welcome card.
 
 ✦ Rank | Display a users level.
