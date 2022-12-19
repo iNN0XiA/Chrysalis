@@ -27,16 +27,19 @@ const announceLevelUp = require('./utils/embed/announceLevelUp.js');
 const boostEmbed = require('./utils/embed/boostEmbed.js');
 const connectToDatabase = require('./utils/connectToDatabase.js');
 const defaultModules = require('./defaultModules.js');
-const botToken = require("../config.json");
-const logger = require('./modules/Logger.js');
-const embeds = require('./modules/Embeds.js');
-const util = require('./modules/Util.js');
+const BotToken = require("../config.json");
+const Logger = require('./modules/Logger.js');
+const Embeds = require('./modules/Embeds.js');
+const Util = require('./modules/Util.js');
 const onCooldown = new Set();
 const inVoiceChat = new Set();
 const banned = new Set();
-
+client.commands = new Collection();
+client.logger = Logger;
+client.utils = Util;
+client.say = Embeds;
 client.on('ready', async () => {
-	console.log(highlight(`Bot started as ${client.user.tag}`));
+	console.log(highlight(`Please, call me Princess Mi Amore Cadenza. ${client.user.tag}`));
 	await registerCommands();
 	setInterval((() => { client.user.setPresence(presence); }), 1800000); // Refresh presence every half an hour so it doesn't vanish
 	let totalMembers = 0;
