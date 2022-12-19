@@ -147,29 +147,44 @@ client.on('interactionCreate', async (i) => {
 		}
 	}
 
-	require("./modules/checkValid");
+	require('dotenv').config();
+	const path = require('path');
+	const fs = require('fs');
+	const reloadSlashCommands = require('./utils/reloadSlashCommands.js');
+	const announceLevelUp = require('./utils/embed/announceLevelUp.js');
+	const boostEmbed = require('./utils/embed/boostEmbed.js');
+	const connectToDatabase = require('./utils/connectToDatabase.js');
+	const defaultModules = require('./defaultModules.js');
+	const onCooldown = new Set();
+	const inVoiceChat = new Set();
+	const banned = new Set();
 
-const { Collection, Client, Intents } = require("discord.js");
-const { Player } = require("discord-player");
 
-const { botToken } = require("../config.json");
-const Logger = require("./modules/Logger");
-const Embeds = require("./modules/Embeds");
-const Util = require("./modules/Util");
+
+require('./modules/checkValid').config();
+const { Collection, Client, Intents } = require('.discord.js');
+const Player = require('.discord-player');
+const botToken = require('../config.json');
+const Logger = require('./modules/Logger');
+const Embeds = require('./modules/Embeds');
+const Util = require('./modules/Util');
 
 const bot = new Client({
   intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MESSAGES,
-    Intents.FLAGS.GUILD_VOICE_STATES
+    GatewayIntentBits.FLAGS.GUILDS,
+    GatewayIntentBits.FLAGS.GUILD_MESSAGES,
+    GatewayIntentBits.FLAGS.GUILD_VOICE_STATES
+	        // ...
   ],
   allowedMentions: { parse: ["roles", "users"], repliedUser: false }
 });
 
 bot.commands = new Collection();
+
 bot.logger = Logger;
 bot.utils = Util;
 bot.say = Embeds;
+
 bot.player = new Player(bot, {
   leaveOnEnd: true,
   leaveOnStop: true,
@@ -179,7 +194,7 @@ bot.player = new Player(bot, {
   initialVolume: 100
 });
 
-require("./handler/EventHandler")(bot);
+require('./handler/EventHandler')(bot);
 
 bot.login(botToken);
 
