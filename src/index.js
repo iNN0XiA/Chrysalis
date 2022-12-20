@@ -1,18 +1,42 @@
-const { Client, GatewayIntentBits, Collection, EmbedBuilder, PermissionsBitField, OAuth2Scopes, resolveColor } = require('discord.js');
+const { Client, GatewayIntentBits, Partials, Collection, EmbedBuilder, PermissionsBitField, OAuth2Scopes, resolveColor } = require('discord.js');
+const Config = require("./structures/Settings/config.json");
 const presence = require('./presence.js');
+const color = require("colors");
 const client = new Client({
 	failIfNotExists: false,
 	presence: presence,
 	intents: [
-		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.GuildMessageReactions,
-		GatewayIntentBits.GuildMembers,
-		GatewayIntentBits.GuildVoiceStates,
-		GatewayIntentBits.GuildBans,
-		GatewayIntentBits.DirectMessages
-	]
+		GatewayIntentBits.AutoModerationConfiguration,
+        GatewayIntentBits.AutoModerationExecution,
+        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.DirectMessageTyping,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildBans,
+        GatewayIntentBits.GuildEmojisAndStickers,
+        GatewayIntentBits.GuildIntegrations,
+        GatewayIntentBits.GuildInvites,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildMessageTyping,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildScheduledEvents,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildWebhooks,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.MessageContent
+	],
+    partials: [
+        Partials.Channel,
+        Partials.GuildMember,
+        Partials.GuildScheduledEvent,
+        Partials.Message,
+        Partials.Reaction,
+        Partials.ThreadMember,
+        Partials.User
+    ],
+    fetchAllMembers: true,
 });
 require('dotenv').config();
 const path = require('path');
@@ -25,6 +49,17 @@ const defaultModules = require('./defaultModules.js');
 const onCooldown = new Set();
 const inVoiceChat = new Set();
 const banned = new Set();
+
+client.slashCommands = new Collection();
+client.buttonCommands = new Collection();
+client.selectMenus = new Collection();
+client.modalForms = new Collection();
+client.cooldowns = new Collection();
+client.events = new Collection();
+
+if (Config.DEVELOPER.Settings.Enable_Database) {
+    require("./structures/Handlers/mongoDB.js");
+};
 
 client.on('ready', async () => {
 	console.log(highlight(`Bot started as ${client.user.tag}`));
@@ -170,7 +205,19 @@ client.on('interactionCreate', async (i) => {
 	}
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.TOKEN || Config.Application_Information.TOKEN).then(() => {
+		loadEvents(client, color);
+		loadCommands(client, color);
+		loadModalForms(client, color);
+		loadSelectMenus(client, color);
+		loadButtonCommands(client, color);
+		antiCrash(client, color);
+		server(client, color);
+	}).catch(err => {
+		console.log(`${color.bold.bgBlue(`[${moment().format("dddd - DD/MM/YYYY - hh:mm:ss", true)}]`)} ` + `${color.bold.red(`[INDEX ERROR]`)} ` + `${err}`.bgRed);
+	});
+
+	module.exports = client;
 
 async function isRestricted(command, message, modules) {
 	let cmdModule = modules.find((c) => c.name == command) || modules.find(c=>c.name==client.commands.get(command)?.dependsOn);
