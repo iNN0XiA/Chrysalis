@@ -290,12 +290,12 @@ async function botInfo(message, guildInfo) {
 		fields: [
 			{
 				name: `💻 ${lang.source_code}`,
-				value: `[Codeberg (Gitea)](https://codeberg.org/programmerpony/Chrysalis)`,
+				value: `[Codeberg (iNN0XiA)](https://github.com/iNN0XiA/Chrysalis)`,
 				inline: true
 			},
 			{
 				name: `💞 ${lang.support_the_project}`,
-				value: '[Liberapay](https://liberapay.com/programmerpony/)',
+				value: '[Liberapay](https://liberapay.com/iNN0XiA/)',
 				inline: true
 			}
 		],
