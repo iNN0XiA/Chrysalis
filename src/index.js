@@ -284,20 +284,16 @@ async function botInfo(message, guildInfo) {
 	});
 	message.channel.send({embeds:[{
 		title: client.user.username,
-		description: `[${lang.invite_the_bot}](${invite}) | [${lang.website}](https://chrysalis.programmerpony.com) | [${lang.support_server}](https://discord.gg/Vj2jYQKaJP)`,
+		description: `[${lang.invite_the_bot}](${invite}) | [${lang.website}](https://github.com/iNN0XiA/Chrysalis) | [${lang.support_server}](https://discord.gg/vVBfGFt5Ev)`,
 		thumbnail: { url: client.user.displayAvatarURL() },
 		color: guildInfo.color,
 		fields: [
 			{
 				name: `💻 ${lang.source_code}`,
-				value: `[Codeberg (iNN0XiA)](https://github.com/iNN0XiA/Chrysalis)`,
+				value: `[GitHub](https://github.com/iNN0XiA/Chrysalis)`,
 				inline: true
 			},
-			{
-				name: `💞 ${lang.support_the_project}`,
-				value: '[Liberapay](https://liberapay.com/iNN0XiA/)',
-				inline: true
-			}
+
 		],
 		footer: {text: lang.the_current_prefix_for_this_server_is(guildInfo.prefix)}
 	}]}).catch(r=>{});
