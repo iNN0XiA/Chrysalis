@@ -1,5 +1,4 @@
-const { Client, GatewayIntentBits, Collection, EmbedBuilder, PermissionsBitField, OAuth2Scopes, resolveColor, Intents } = require('discord.js');
-const { Player } = require("discord-player");
+const { Client, GatewayIntentBits, Collection, EmbedBuilder, PermissionsBitField, OAuth2Scopes, resolveColor } = require('discord.js');
 const presence = require('./presence.js');
 const client = new Client({
 	failIfNotExists: false,
@@ -13,12 +12,9 @@ const client = new Client({
 		GatewayIntentBits.GuildVoiceStates,
 		GatewayIntentBits.GuildBans,
 		GatewayIntentBits.DirectMessages
-  ],
-  allowedMentions: { parse: ["roles", "users"], repliedUser: false }
+	]
 });
-
 require('dotenv').config();
-require("./handler/EventHandler");
 const path = require('path');
 const fs = require('fs');
 const reloadSlashCommands = require('./utils/reloadSlashCommands.js');
@@ -26,38 +22,17 @@ const announceLevelUp = require('./utils/embed/announceLevelUp.js');
 const boostEmbed = require('./utils/embed/boostEmbed.js');
 const connectToDatabase = require('./utils/connectToDatabase.js');
 const defaultModules = require('./defaultModules.js');
-const Logger = require('./modules/Logger.js');
-const Embeds = require('./modules/Embeds.js');
-const Util = require('./modules/Util.js');
 const onCooldown = new Set();
 const inVoiceChat = new Set();
 const banned = new Set();
-client.commands = new Collection();
-client.logger = Logger;
-client.utils = Util;
-client.say = Embeds;
+
 client.on('ready', async () => {
-	console.log(highlight(`Please, call me Princess Mi Amore Cadenza. ${client.user.tag}`));
+	console.log(highlight(`Bot started as ${client.user.tag}`));
 	await registerCommands();
 	setInterval((() => { client.user.setPresence(presence); }), 1800000); // Refresh presence every half an hour so it doesn't vanish
 	let totalMembers = 0;
 	for (guild of client.guilds.cache.values()) totalMembers+=guild.memberCount;
 	console.log(highlight(`${client.user.username} is ready on ${client.guilds.cache.size} server${client.guilds.cache.size !== 1 ? 's' : ''} with a total of ${totalMembers} members!`));
-});
-
-client.commands = new Collection();
-
-client.logger = Logger;
-client.utils = Util;
-client.say = Embeds;
-
-client.player = new Player(client, {
-  leaveOnEnd: true,
-  leaveOnStop: true,
-  leaveOnEmpty: true,
-  leaveOnEmptyCooldown: 60000,
-  autoSelfDeaf: true,
-  initialVolume: 100
 });
 
 client.on('guildCreate', (guild) => {
