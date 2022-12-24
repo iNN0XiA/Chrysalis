@@ -115,6 +115,18 @@ module.exports = {
                 ]
             },
             {
+            name: 'attack',
+            description: 'Attacks a user.',
+            options: [
+                {
+                    name: 'user',
+                    type: ApplicationCommandOptionType.User,
+                    description: 'The user you want to fight.',
+                    required: true
+                    }
+                ]
+            },
+            {
                 name: 'hug',
                 description: 'Hugs a user.',
                 options: [
