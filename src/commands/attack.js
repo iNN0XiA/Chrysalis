@@ -2,7 +2,7 @@ const actionEmbed = require('../utils/embed/actionEmbed.js');
 
 module.exports = {
     name: 'attack',
-    alias: ['attacks, fight'],
+    alias: ['attacks','fight'],
     run: async (client, message, command, args, lang, guildInfo) => {
 
         const gifs = [
@@ -19,17 +19,20 @@ module.exports = {
         ];
 
         actionEmbed(message, guildInfo.color, args, {
-            text: lang.attack_title,
+            text: lang.hug_title,
             gifs: gifs,
             onSelf: {
-                text: lang.attack_self,
-                gifs: ['https://cdn.discordapp.com/attachments/1001601329497636997/1056334844646400040/attackself.gif']
+              text: lang.attack_self,
+              gifs: ['https://cdn.discordapp.com/attachments/862296245922037800/874334737542549514/-_self.gif']
             },
             onChrysalis: {
-                text: lang.attack_chrysalis,
-                gifs: ['https://cdn.discordapp.com/attachments/1001601329497636997/1056333420558553178/fightchrysalis.gif']
+              text: lang.attack_chrysalis,
+              gifs: ['https://cdn.discordapp.com/attachments/1001601329497636997/1056333420558553178/fightchrysalis.gif']
+            },
+            onEverypony: {
+              gifs: ['https://cdn.discordapp.com/attachments/862296245922037800/876471497655468032/-_everypony.gif']
             }
-        });
-
-    }
-}
+          });
+      
+        }
+      }
