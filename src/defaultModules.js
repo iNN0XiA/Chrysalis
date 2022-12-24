@@ -102,6 +102,12 @@ module.exports = [
     allowedChannels: []
   },
   {
+    name: 'attack',
+    enabled: true,
+    restricted: false,
+    allowedChannels: []
+  },
+  {
     name: 'hug',
     enabled: true,
     restricted: false,
