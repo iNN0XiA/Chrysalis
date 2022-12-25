@@ -119,7 +119,7 @@ module.exports = {
         description: `Attack un'utente.`,
         options: [
           {
-            name: 'Attack',
+            name: 'attack',
             type: ApplicationCommandOptionType.User,
             description: `L'utente di cui vuoi fare un Attack.`,
             required: true
