@@ -19,11 +19,11 @@ module.exports = {
         ];
 
         actionEmbed(message, guildInfo.color, args, {
-            text: lang.hug_title,
+            text: lang.attack_title,
             gifs: gifs,
             onSelf: {
               text: lang.attack_self,
-              gifs: ['https://cdn.discordapp.com/attachments/862296245922037800/874334737542549514/-_self.gif']
+              gifs: ['https://cdn.discordapp.com/attachments/1001601329497636997/1056396673884094474/FightYourself.gif']
             },
             onChrysalis: {
               text: lang.attack_chrysalis,
