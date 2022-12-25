@@ -115,6 +115,18 @@ module.exports = {
         ]
       },
       {
+        name: 'Attack',
+        description: `Attack un'utente.`,
+        options: [
+          {
+            name: 'Attack',
+            type: ApplicationCommandOptionType.User,
+            description: `L'utente di cui vuoi fare un Fight.`,
+            required: true
+          }
+        ]
+      },
+      {
         name: 'hug',
         description: 'Abraza a un usuario.',
         options: [
@@ -373,6 +385,9 @@ module.exports = {
   boop_title: (user) => `${user[0]} le ha hecho boop a ${user[1]}`,
   boop_self: (user) => `${user} se ha hecho boop a sí mism@`,
   boop_chrysalis: (user) => `${user} trató de hacerle boop a Chrysalis`,
+  attack_title: (user) => `${user[0]} Attacked ${user[1]}!`,
+  attack_self: (user) => `${user} Attacked themself`,
+  attack_chrysalis: (user) => `${user} Tried to attack Chrysalis`,
   hug_title: (user) => `${user[0]} ha abrazado a ${user[1]}`,
   hug_self: (user) => `${user} se ha abrazado a sí mism@`,
   hug_chrysalis: (user) => `${user} trató de abrazar a Chrysalis`,
