@@ -19,7 +19,7 @@ module.exports = {
 
 
         // If tagged user is Chrysalis, send profile picture artwork source
-        if (taggedUser.id == client.user.id) return reply(message, 'https://www.deviantart.com/mirroredsea/art/Chrysalis-718716441');
+        if (taggedUser.id == client.user.id) return reply(message, 'https://i.imgur.com/z3tf8tC.png');
 
         return reply(message, {
             embeds: [{
