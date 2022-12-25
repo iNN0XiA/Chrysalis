@@ -115,13 +115,13 @@ module.exports = {
         ]
       },
       {
-        name: 'Attack',
+        name: 'attack',
         description: `Attack un'utente.`,
         options: [
           {
             name: 'Attack',
             type: ApplicationCommandOptionType.User,
-            description: `L'utente di cui vuoi fare un Fight.`,
+            description: `L'utente di cui vuoi fare un Attack.`,
             required: true
           }
         ]
