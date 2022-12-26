@@ -21,6 +21,8 @@ Search for Pony/MLP related images along with many other social/administrative c
 
 ✦ Hug | Hug another user!
 
+✦ Wave | Wave at another user!
+
 ✦ Attack Attack another user!
 
 ✦ Say | Tell Chrysalis what you want her to say.
