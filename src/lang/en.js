@@ -127,6 +127,18 @@ module.exports = {
                 ]
             },
             {
+            name: 'wave',
+            description: 'Greet a user.',
+            options: [
+                {
+                    name: 'user',
+                    type: ApplicationCommandOptionType.User,
+                    description: 'The user you want to greet.',
+                    required: true
+                    }
+                ]
+            },
+            {
                 name: 'hug',
                 description: 'Hugs a user.',
                 options: [
@@ -388,6 +400,9 @@ module.exports = {
     attack_title: (user) => `${user[0]} Attacked ${user[1]}!`,
     attack_self: (user) => `${user} Attacked themself`,
     attack_chrysalis: (user) => `${user} Tried to attack Chrysalis`,
+    wave_title: (user) => `${user[0]} Waved at ${user[1]}!`,
+    wave_self: (user) => `${user} Greeted themself`,
+    wave_chrysalis: (user) => `${user} Tried to greet Chrysalis`,
     hug_title: (user) => `${user[0]} hugged ${user[1]}`,
     hug_self: (user) => `${user} hugged themself`,
     hug_chrysalis: (user) => `${user} tried to hug Chryalis`,
