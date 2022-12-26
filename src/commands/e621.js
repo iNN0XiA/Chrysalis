@@ -12,7 +12,7 @@ module.exports = {
             // If you're too horny and 320 images aren't enough, type more tags.
             await fetch(`https://e621.net/posts.json?${args.length > 0 ? `tags=${message.author ? args.join('+') : args[0].replaceAll(' ', '+')}&limit=320` : 'limit=320'}`, {
                 headers: {
-                    'User-Agent': 'Chrysalis (programmerpony)' // Type your e621 username between the parenthesis
+                    'User-Agent': 'Chrysalis (iNN0XiA)'
                 }
             }).then(res => res.json()).then(async json => {
                 randomImage = json.posts[Math.floor(Math.random() * json.posts.length)];
