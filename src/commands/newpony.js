@@ -6,9 +6,9 @@ module.exports = {
     description: 'Get an entirely Unique Pony!',
     run: async (guildInfo) => {
         
-        let filter = guildInfo.modules.find((c) => c.name == 'newpony').filter {
-            url: "https://ifunny.co/tags/" + args,
-            method: "GET",
+        let filter = guildInfo.modules.find((c) => c.name == 'newpony').filter
+            request: "https://ifunny.co/tags/" + args,
+            cheerio: "GET",
             headers: {
                 "Accept": "text/html",
                 "User-Agent": "Chrome"
