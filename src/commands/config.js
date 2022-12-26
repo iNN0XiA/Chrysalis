@@ -17,7 +17,7 @@ module.exports = {
         if (!requestedModule || validModules.indexOf(requestedModule) == -1) return message.channel.send({
             embeds: [{
                 title: lang.valid_modules,
-                description: validModules.map(m => `[${m}](https://chrysalis-docs.programmerpony.com${guildInfo.lang == 'es' ? '/es/' : '/'}modules/${m}.html)`).join('\n'),
+                description: validModules.map(m => `[${m}](https://github.com/iNN0XiA/Chrysalis${guildInfo.lang == 'es' ? '/es/' : '/'}modules/${m}.html)`).join('\n'),
                 color: guildInfo.color
             }]
         });
