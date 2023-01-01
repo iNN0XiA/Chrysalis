@@ -63,7 +63,7 @@ async function moduleInfo(message, requestedModule, guildInfo, lang, content, in
         if (embed[i]?.data.fields.length == 5) i++;
         embed[i] ??= new EmbedBuilder({ // Create page if it doesn't exist
             title: requestedModule,
-            url: `https://chrysalis-docs.programmerpony.com${guildInfo.lang == 'es' ? '/es/' : '/'}modules/${requestedModule}.html`,
+            url: `https://github.com/iNN0XiA/Chrysalis${guildInfo.lang == 'es' ? '/es/' : '/'}modules/${requestedModule}.html`,
             color: guildInfo.color,
             footer: { text: lang.check_documentation }
         });
