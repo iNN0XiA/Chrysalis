@@ -284,7 +284,7 @@ async function botInfo(message, guildInfo) {
 	});
 	message.channel.send({embeds:[{
 		title: client.user.username,
-		description: `[${lang.invite_the_bot}](${invite}) | [${lang.website}](https://github.com/iNN0XiA/Chrysalis) | [${lang.support_server}](https://discord.gg/vVBfGFt5Ev)`,
+		description: `[${lang.invite_the_bot}](${invite}) | [${lang.website}](https://github.com/iNN0XiA/Chrysalis) | [${lang.support_server}](https://discord.gg/BrVJnX8xbm)`,
 		thumbnail: { url: client.user.displayAvatarURL() },
 		color: guildInfo.color,
 		fields: [
